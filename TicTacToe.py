@@ -70,12 +70,14 @@ def playerEntry (player): #P1 and P2 entry
             numPick.append(pick)
             makeBoard(1)
         else:
-            print("\nMake sure number entered is "
+            print("Invalid!"
+                  "\nMake sure number entered is "
                 "an INTEGER 1-9 and NOT already entered!\n")
             makeBoard(1)
             playerEntry(player)
     except ValueError:
-        print("\nMake sure number entered is "
+        print("Invalid!"
+              "\nMake sure number entered is "
             "an INTEGER 1-9 and NOT already entered!\n")
         makeBoard(1)
         playerEntry(player)
@@ -85,19 +87,26 @@ def playerEntry (player): #P1 and P2 entry
 def playGame(end):      #playing the game
     while end == 0:
         if end == 0:
+            print('X plays next')
             playerEntry('x')
             end = endState()
         if end == 0:
+            print('O plays next')
             playerEntry('o')
             end = endState()
     if end != 0:
-        replay = input("Play again? Enter Y or N: ")
+        replay = input("Play again? Enter 'Y' or 'N': ")
         if replay == 'N' or replay == 'n':
-            return
+            exit()
         elif replay == 'Y' or replay == 'y':
+            spaces.clear()
+            numPick.clear()
+            for i in range(9):
+                spaces.append(' ')
+            print(spaces)
             playGame(0)
         else:
-            print("Entry needs to by a Y or a N")
+            print("Entry needs to by a 'Y' or a 'N'")
             playGame(1)
         
 
@@ -134,6 +143,9 @@ def endState():#End game
         or (spaces[0] == 'o' and spaces[4] == 'o' and spaces[8] == 'o')
         or (spaces[2] == 'o' and spaces[4] == 'o' and spaces[6] == 'o')):
         print('O wins')
+        return 1
+    if ' ' not in spaces:
+        print('No one wins')
         return 1
     else:
         return 0
