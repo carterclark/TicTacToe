@@ -103,7 +103,6 @@ def playGame(end):      #playing the game
             numPick.clear()
             for i in range(9):
                 spaces.append(' ')
-            print(spaces)
             playGame(0)
         else:
             print("Entry needs to by a 'Y' or a 'N'")
